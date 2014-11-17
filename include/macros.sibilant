@@ -83,6 +83,13 @@
   (concat "(" (join " * " (map args translate)) ")"))
 (macro /   (&rest args)
   (concat "(" (join " / " (map args translate)) ")"))
+(macro |   (&rest args)
+  (concat "(" (join " | " (map args translate)) ")"))
+(macro &   (&rest args)
+  (concat "(" (join " & " (map args translate)) ")"))
+(macro ^   (&rest args)
+ (concat "(" (join " ^ " (map args translate)) ")"))
+
 (macro or  (&rest args)
   (concat "(" (join " || " (map args translate)) ")"))
 
