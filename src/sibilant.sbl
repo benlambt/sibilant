@@ -58,7 +58,7 @@
 (def sibilant.version ()
   (get (sibilant.package-info) 'version))
 
-(set require.extensions ".sibilant"
+(set require.extensions ".sbl"
      (#(module filename)
        (var content (sibilant.translate-file filename))
        (module.*compile content filename)))
@@ -69,8 +69,8 @@
        (set module 'exports (JSON.parse content))))
 
 (def sibilant.include (file)
-  (when (not (file.match (regex ".sibilant$")))
-    (assign file (concat file ".sibilant")))
+  (when (not (file.match (regex ".sbl$")))
+    (assign file (concat file ".sbl")))
 
   (when (file.match (regex "^\.\.?/"))
     (assign file (concat sibilant.dir "/" file)))
