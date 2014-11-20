@@ -25,6 +25,7 @@
          x         'execute
          e         'eval
          i         'input
+         w         'wrap
          after-break false
          execute   false
          unlabeled 'file)
@@ -61,6 +62,9 @@
                    (#(err data)
                      (when err (throw err))
                      (console.log data))))
+(var wrap? false)
+(def cli.wrap (args options)
+  (assign wrap? true))
 
 (var cli-options (options cli)
      args (or cli-options.after-break []))
@@ -80,6 +84,9 @@
        translated (if (= ".son" input-extname)
                     (sibilant.translate-json input-path)
                     (sibilant.translate-file input-path)))
+
+  (when wrap?
+    (assign translated (concat "(function(){\n" translated "}())\n")))
 
   (if output-dir
     (do
